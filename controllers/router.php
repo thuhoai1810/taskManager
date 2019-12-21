@@ -19,12 +19,7 @@ if (isset($_GET['controller'])) {
         break;
     case 'dashboard':
         $zone = $_GET['zone'];
-        
-        if ($zone == 3) {
-            $user = user::selectAllUser();
-        } else {
-            $user = user::selectUserWithZone($zone);
-        }
+        $user = user::selectUserWithZone($zone);
         require_once 'views/dashboard.php';
         break;
     default:

@@ -98,6 +98,24 @@ if (!isset($_SESSION['id'])) {
   <?php
         require_once "controllers/router.php";
         ?>
+  <div class="modal fade" id="myModal">
+            <div class="modal-dialog modal-lg mw-100 w-75">
+                <div class="modal-content">
+                    <div class='modal-header'>
+                        <h4 class='modal-title' id="taskName"></h4>
+                        <button type='button' class='close' data-dismiss='modal'>×</button>
+                    </div>
+                    <div id="detailTask">
+
+                    </div>
+                    <!-- Modal Header -->
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" data-dismiss="modal">Hoàn thành</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 </body>
 <script>
     $('#datepicker1').datepicker({
@@ -106,5 +124,99 @@ if (!isset($_SESSION['id'])) {
     $('#datepicker2').datepicker({
         uiLibrary: 'bootstrap4'
     });
+    function detailTask(id,headline) {
+        document.getElementById("taskName").innerHTML = headline
+        getTaskChild(id)
+        $("#myModal").modal();
+    };
+
+    function detailT(id) {
+        $.ajax({
+          type: "POST",
+            url: "controllers/taskUser.php",
+            timeout: 1500, // sau 1.5 giây mà không phản hồi thì dừng => hiện lỗi
+            data: {
+                request: "getTaskId",
+                id: id
+            },
+            cache: false,
+            success: function (html) {
+              document.getElementById("taskName").innerHTML = html
+              getTaskChild(id)
+              $("#myModal").modal();
+            }
+        })
+    }
+
+    function getTaskChild(id) {
+        $.ajax({
+            type: "POST",
+            url: "controllers/taskChild.php",
+            timeout: 1500, // sau 1.5 giây mà không phản hồi thì dừng => hiện lỗi
+            data: {
+                request: "getTaskChild",
+                id: id
+            },
+            cache: false,
+            success: function (html) {
+                $("#detailTask").html(html);
+            }
+        })
+    };
+
+    function addTaskChild(id) {
+        var body = $("#bodyTask").val()
+        console.log(body)
+        $.ajax({
+            type: "POST",
+            url: "controllers/taskChild.php",
+            timeout: 1500, // sau 1.5 giây mà không phản hồi thì dừng => hiện lỗi
+            data: {
+                request: "addTakChild",
+                id: id,
+                body:body
+            },
+            cache: false,
+            success: function (data) {
+                getTaskChild(id)
+            }
+        })
+    };
+
+    function taskFinish(id,parent) {
+        $.ajax({
+            type: "POST",
+            url: "controllers/taskChild.php",
+            timeout: 1500, // sau 1.5 giây mà không phản hồi thì dừng => hiện lỗi
+            data: {
+                request: "updateStateTask",
+                id: id,
+                parent:parent,
+                state: 2
+            },
+            cache: false,
+            success: function (html) {
+                $("#detailTask").html(html);
+            }
+        })
+    }
+
+    function taskNoneFinish(id,parent) {
+        $.ajax({
+            type: "POST",
+            url: "controllers/taskChild.php",
+            timeout: 1500, // sau 1.5 giây mà không phản hồi thì dừng => hiện lỗi
+            data: {
+                request: "updateStateTask",
+                id: id,
+                parent:parent,
+                state:1
+            },
+            cache: false,
+            success: function (html) {
+                $("#detailTask").html(html);
+            }
+        })
+    }
 </script>
 </html>

@@ -6,6 +6,16 @@ switch ($_POST['request']) {
     case 'getTaskChild':
         $id = $_POST['id'];
         $id = (int)$id;
+        $allTask = task::countTask($id,3);
+        $taskDone = task::countTask($id,2);
+        $countT = count($allTask);
+        $counTd = count($taskDone);
+        if ($countT === 0) {
+            $percent = 0;
+        } else {
+            $percent = ($counTd/$countT)*100;
+        }
+        
         echo "
             <div class='modal-body'>
                 <div class='row'>
@@ -32,7 +42,13 @@ switch ($_POST['request']) {
                 <button class='btn btn-primary' onclick='addTaskChild(".$id.")'>Thêm công việc</button>
             </div>
         </div>
-    </div>";
+    </div>
+    <div class='progress' style='margin: 5%'>
+                        <div class='progress-bar progress-bar-striped active progress-bar-animated' role='progressbar'
+                            aria-valuenow='".$percent."' aria-valuemin='0' aria-valuemax='100' style='width:".$percent."%'>
+                            ".$percent."%
+                        </div>
+                    </div>";
         break;
     case 'addTakChild':
         $id = $_POST['id'];
@@ -52,6 +68,16 @@ switch ($_POST['request']) {
         $parent = $_POST['parent'];
         $parent = (int)$parent;
         task::updateStateTask($id,$state);
+
+        $allTask = task::countTask($parent,3);
+        $taskDone = task::countTask($parent,2);
+        $countT = count($allTask);
+        $counTd = count($taskDone);
+        if ($countT === 0) {
+            $percent = 0;
+        } else {
+            $percent = ($counTd/$countT)*100;
+        }
         echo "
             <div class='modal-body'>
                 <div class='row'>
@@ -78,7 +104,13 @@ switch ($_POST['request']) {
                 <button class='btn btn-primary' onclick='addTaskChild(".$id.")'>Thêm công việc</button>
             </div>
         </div>
-    </div>";
+    </div>
+    <div class='progress' style='margin: 5%'>
+                        <div class='progress-bar progress-bar-striped active progress-bar-animated' role='progressbar'
+                            aria-valuenow='".$percent."' aria-valuemin='0' aria-valuemax='100' style='width:".$percent."%'>
+                            ".$percent."%
+                        </div>
+                    </div>";
         break;
 }
 ?>

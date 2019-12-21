@@ -66,15 +66,9 @@ class task extends Database{
         foreach ($taskDone as $td) {
             echo "tr>
             <th scope='row'>".$td->id."</th>
-            <td>".$td->headline."</td>
+            <td>".$td->headline." <button type='button' class='btn float-right'><i class='fas fa-caret-down' onclick='detailT(".$td->id.")'></i></button></td>
             <td>
-                <div class='progress'>
-                    <div class='progress-bar progress-bar-striped'
-                        role='progressbar' aria-valuenow='100' aria-valuemin='0' aria-valuemax='100'
-                        style='width:100%'>
-                        100%
-                    </div>
-                </div>
+                ".self::progress($td->id)."
             </td>
             <td>".$td->duedate."</td>
         </tr>";
@@ -89,16 +83,10 @@ class task extends Database{
                     <th scope='row'>".$ti->id."</th>
                     <td>
                             ".$ti->headline."
-                        </div>
+                            <button type='button' class='btn float-right'><i class='fas fa-caret-down' onclick='detailT(".$ti->id.")'></i></button>
                     </td>
                     <td>
-                        <div class='progress'>
-                            <div class='progress-bar progress-bar-striped'
-                                role='progressbar' aria-valuenow='40' aria-valuemin='0' aria-valuemax='100'
-                                style='width:40%'>
-                                40%
-                            </div>
-                        </div>
+                    ".self::progress($ti->id)."
                     </td>
                     <td>".$ti->duedate."</td>
                 </tr>";
@@ -110,14 +98,11 @@ class task extends Database{
         foreach ($taskDis as $td) {
             echo "<tr>
             <th scope='row'>".$td->id."</th>
-            <td>".$td->headline."</td>
+            <td>".$td->headline."
+            <button type='button' class='btn float-right'><i class='fas fa-caret-down' onclick='detailT(".$td->id.")'></i></button>
+            </td>
             <td>
-                <div class='progress'>
-                    <div class='progress-bar progress-bar-striped' role='progressbar' aria-valuenow='20'
-                        aria-valuemin='0' aria-valuemax='100' style='width:20%'>
-                        20%
-                    </div>
-                </div>
+                ".self::progress($td->id)."
             </td>
             <td>".$td->duedate."</td>
         </tr>";
@@ -168,6 +153,60 @@ class task extends Database{
             
         }
        }
+    }
+    function countTask($id,$state)
+    {
+        if ($state === 3) {
+            $sql = "SELECT * FROM tasks WHERE parent = $id";
+            $result = parent::execute($sql);
+            if (mysqli_num_rows($result)>0) {
+                while($row = mysqli_fetch_object($result)){
+                    $data[]=$row;
+                }
+            } else {
+                $data = [];
+            }
+            return $data;
+        } else {
+            $sql = "SELECT * FROM tasks WHERE parent = $id AND state = $state";
+            $result = parent::execute($sql);
+            if (mysqli_num_rows($result)>0) {
+                while($row = mysqli_fetch_object($result)){
+                    $data[]=$row;
+                }
+            } else {
+                $data = [];
+            }
+            return $data;
+        }
+        
+    }
+    function progress($id)
+    {
+        $allTask = self::countTask($id,3);
+        $taskDone = self::countTask($id,2);
+        $countT = count($allTask);
+        $counTd = count($taskDone);
+        if ($countT === 0) {
+            $percent = 0;
+            return "
+        <div class='progress'>
+                        <div class='progress-bar progress-bar-striped active progress-bar-animated' role='progressbar'
+                            aria-valuenow='0' aria-valuemin='0' aria-valuemax='100' style='width:0%'>
+                            0%
+                        </div>
+                    </div>";
+        } else {
+            $percent = ($counTd/$countT)*100;
+            return "
+        <div class='progress'>
+                        <div class='progress-bar progress-bar-striped active progress-bar-animated' role='progressbar'
+                            aria-valuenow='".round($percent, 1)."' aria-valuemin='0' aria-valuemax='100' style='width:".round($percent, 1)."%'>
+                            ".round($percent, 1)."%
+                        </div>
+                    </div>";
+        }
+        
     }
 }
 ?>

@@ -7,9 +7,7 @@ $zone = user::selectZoneForUser($id);
 $p = (int)$permiss[0]->permission;
 $z = (int)$zone[0]->zone;
 if ($p <= 3) {
-    echo "<li class='nav-item'>
-                <a class='nav-link' href='index.php?controller=dashboard&zone={$z}'>Danh sách nhân viên</a>
-            </li>
+    echo "
             <li class='nav-item dropdown'>
         <a class='nav-link dropdown-toggle' id='navbarDropdown' href='#' role='button' data-toggle='dropdown' aria-haspopup'true' aria-expanded='false'>
           Phòng ban

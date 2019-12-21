@@ -48,5 +48,9 @@ switch ($_POST['request']) {
         task::selectUserTaskDis($id);
         echo "</tbody>";
         break;
+    case 'getTaskId':
+        $task = task::selectTaskId((int)$_POST['id']);
+        echo $task[0]->headline;
+        break;
 }
 ?>
