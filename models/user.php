@@ -1,12 +1,27 @@
 <?php
 class user extends Database{
-    function createUser($username,$pass,$fullname,$phone){
-        $sql ="INSERT INTO users('name','permission','phone','zone','position','username','pass') VALUES ('{$fullname}',21,'{$phone}',6,'none','${username}','{$pass}'";
+    function createUser($name,$phone,$zone,$permiss,$position,$kpi){
+        $sql ="INSERT INTO users(name,permission,phone,zone,position,kpi) VALUES ('{$name}',$permiss,'{$phone}',$zone,'${position}',$kpi)";
+        parent::execute($sql);
+    }
+    function regiter($user,$id){
+        $sql ="INSERT INTO login(user,pass,user_id) VALUES ('{$user}','tunt',$id)";
         parent::execute($sql);
     }
     function updateUser($id,$col,$data){
         $sql = "UPDATE users SET $cot = '{$data}' WHERE id=$id";
         parent::execute($sql);
+    }
+    function findUserFollowPhone($phone){
+        $result = self::execute("SELECT * From users where phone = '{$phone}'");
+        if (mysqli_num_rows($result)>0) {
+            while ($row = mysqli_fetch_object($result)) {
+                $data[]=$row;
+            }
+          } else {
+                $data= [];
+          }
+          return $data;
     }
     function deleteUser($id){
         parent::delete('users','id',$id);
@@ -40,6 +55,10 @@ class user extends Database{
          }
       
         return $data;
+    }
+    function selectUserWithId($id)
+    {
+        return parent::findData('*','users','id',$id);
     }
 }
 ?>

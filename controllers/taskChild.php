@@ -32,18 +32,18 @@ switch ($_POST['request']) {
             task::returnTaskChild($id);
         echo "</table>
             </div>
-            <div class='col-sm-6'>
-                <div class='form-group'>
-                    <label for='comment'>
-                        <h5>Thêm mục tiêu cần làm</h5>
-                    </label>
-                    <textarea class='form-control' rows='5' id='bodyTask' name='text'></textarea>
+                <div class='col-sm-6'>
+                    <div class='form-group'>
+                        <label for='comment'>
+                            <h5>Thêm mục tiêu cần làm</h5>
+                        </label>
+                        <textarea class='form-control' rows='5' id='bodyTask' name='text'></textarea>
+                    </div>
+                    <button class='btn btn-primary' onclick='addTaskChild(".$id.")'>Thêm công việc</button>
                 </div>
-                <button class='btn btn-primary' onclick='addTaskChild(".$id.")'>Thêm công việc</button>
             </div>
         </div>
-    </div>
-    <div class='progress' style='margin: 5%'>
+        <div class='progress' style='margin: 5%'>
                         <div class='progress-bar progress-bar-striped active progress-bar-animated' role='progressbar'
                             aria-valuenow='".$percent."' aria-valuemin='0' aria-valuemax='100' style='width:".$percent."%'>
                             ".$percent."%
@@ -68,7 +68,6 @@ switch ($_POST['request']) {
         $parent = $_POST['parent'];
         $parent = (int)$parent;
         task::updateStateTask($id,$state);
-
         $allTask = task::countTask($parent,3);
         $taskDone = task::countTask($parent,2);
         $countT = count($allTask);
@@ -77,21 +76,24 @@ switch ($_POST['request']) {
             $percent = 0;
         } else {
             $percent = ($counTd/$countT)*100;
+            if ($percent == 100) {
+                task::updateTask($parent,'state',2);
+            }
         }
         echo "
-            <div class='modal-body'>
-                <div class='row'>
-                    <div class='col-sm-6'>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>
-                                        <h5>Danh sách công việc cần làm</h5>
-                                    </th>
-                                </tr>
-                            </thead>
+        <div class='modal-body'>
+            <div class='row'>
+                <div class='col-sm-6'>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>
+                                    <h5>Danh sách công việc cần làm</h5>
+                                </th>
+                            </tr>
+                        </thead>
             ";
-            task::returnTaskChild($parent);
+        task::returnTaskChild($parent);
         echo "</table>
             </div>
             <div class='col-sm-6'>
@@ -104,13 +106,12 @@ switch ($_POST['request']) {
                 <button class='btn btn-primary' onclick='addTaskChild(".$id.")'>Thêm công việc</button>
             </div>
         </div>
-    </div>
-    <div class='progress' style='margin: 5%'>
-                        <div class='progress-bar progress-bar-striped active progress-bar-animated' role='progressbar'
-                            aria-valuenow='".$percent."' aria-valuemin='0' aria-valuemax='100' style='width:".$percent."%'>
-                            ".$percent."%
-                        </div>
-                    </div>";
+        <div class='progress' style='margin: 5%'>
+            <div class='progress-bar progress-bar-striped active progress-bar-animated' role='progressbar'
+                aria-valuenow='".$percent."' aria-valuemin='0' aria-valuemax='100' style='width:".$percent."%'>
+                    ".$percent."%
+            </div>
+        </div>";
         break;
 }
 ?>

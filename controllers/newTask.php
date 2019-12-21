@@ -2,7 +2,7 @@
 require_once "../config/connect.php";
 Database::connect();
 require_once "../models/task.php";
-task::createTask($_POST['headline'],$_POST['body'],$_POST['duedate']);
+task::createTask($_POST['headline'],$_POST['body'],$_POST['duedate'],$_POST['level']);
 //return var_dump($_POST['body'])
 $task = task::selectTaskFollowBody($_POST['body']);
 $iTask = $task[0]->id;

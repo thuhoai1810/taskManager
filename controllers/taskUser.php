@@ -13,7 +13,7 @@ switch ($_POST['request']) {
             <th scope'col'>Tiến trình</th>
             <th scope='col'>Thời hạn</th>
         </tr>
-    </thead>";
+        </thead>";
         echo "<tbody>";
         task::selectUserTaskDone($id);
         echo "</tbody>";
@@ -28,7 +28,7 @@ switch ($_POST['request']) {
             <th scope'col'>Tiến trình</th>
             <th scope='col'>Thời hạn</th>
         </tr>
-    </thead>";
+        </thead>";
         echo "<tbody>";
         task::selectUserTaskIn($id);
         echo "</tbody>";
@@ -43,7 +43,7 @@ switch ($_POST['request']) {
             <th scope'col'>Tiến trình</th>
             <th scope='col'>Thời hạn</th>
         </tr>
-    </thead>";
+        </thead>";
         echo "<tbody>";
         task::selectUserTaskDis($id);
         echo "</tbody>";

@@ -1,20 +1,18 @@
 <?php
 class task extends Database{
-    function createTask($headline,$body,$duadate){
-        $sql = "INSERT INTO tasks(headline,body,duedate,state,parent) VALUES ('{$headline}','{$body}','{$duadate}', 1, 0)";
+    function createTask($headline,$body,$duadate,$level){
+        $sql = "INSERT INTO tasks(headline,body,duedate,state,parent,level) VALUES ('{$headline}','{$body}','{$duadate}', 1, 0, $level)";
         parent::execute($sql);
     }
     function createTaskChild($id,$body,$headline,$duedate){
-        $sql = "INSERT INTO tasks(headline,body,duedate,state,parent) VALUES ('{$headline}','{$body}','{$duedate}', 1, $id)";
+        $sql = "INSERT INTO tasks(headline,body,duedate,state,parent,level) VALUES ('{$headline}','{$body}','{$duedate}', 1, $id, 0)";
         parent::execute($sql);
     }
-    function createTaskUser($idTask,$idUser)
-    {
+    function createTaskUser($idTask,$idUser){
         $sql = "INSERT INTO user_task(userId,taskId) VALUES ($idUser,$idTask)";
         parent::execute($sql);
     }
-    function selectTaskId($id)
-    {
+    function selectTaskId($id){
         $result = parent::execute("SELECT * FROM tasks WHERE id = $id");
         if (mysqli_num_rows($result)>0) {
             while($row = mysqli_fetch_object($result)){
@@ -37,7 +35,7 @@ class task extends Database{
         return $data;
     }
     function updateTask($id,$col,$data){
-        $sql = "UPDATE tasks SET $col = '{$data}' WHERE id = $id";
+        $sql = "UPDATE tasks SET $col = $data WHERE id = $id";
         parent::execute($sql);
     }
     function updateStateTask($id,$state){
@@ -199,6 +197,33 @@ class task extends Database{
         } else {
             $percent = ($counTd/$countT)*100;
             return "
+        <div class='progress'>
+                        <div class='progress-bar progress-bar-striped active progress-bar-animated' role='progressbar'
+                            aria-valuenow='".round($percent, 1)."' aria-valuemin='0' aria-valuemax='100' style='width:".round($percent, 1)."%'>
+                            ".round($percent, 1)."%
+                        </div>
+                    </div>";
+        }
+        
+    }
+    function progress1($id)
+    {
+        $allTask = self::countTask($id,3);
+        $taskDone = self::countTask($id,2);
+        $countT = count($allTask);
+        $counTd = count($taskDone);
+        if ($countT === 0) {
+            $percent = 0;
+            echo "
+        <div class='progress'>
+                        <div class='progress-bar progress-bar-striped active progress-bar-animated' role='progressbar'
+                            aria-valuenow='0' aria-valuemin='0' aria-valuemax='100' style='width:0%'>
+                            0%
+                        </div>
+                    </div>";
+        } else {
+            $percent = ($counTd/$countT)*100;
+            echo "
         <div class='progress'>
                         <div class='progress-bar progress-bar-striped active progress-bar-animated' role='progressbar'
                             aria-valuenow='".round($percent, 1)."' aria-valuemin='0' aria-valuemax='100' style='width:".round($percent, 1)."%'>

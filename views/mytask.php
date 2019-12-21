@@ -1,3 +1,4 @@
+<?php require_once "models/task.php"; ?>
 <!-- breadcrumb -->
 <div class="content-wrapper">
     <ol class="breadcrumb">
@@ -8,7 +9,25 @@
 </div>
 <div class="container-fluid">
     <!-- table -->
-    <div class="table-responsive">
+    <div class="row">
+        <div class="col-xl-6 col-sm-6 pr-4">
+            <div class="card o-hidden mt-2">
+                <div class="card-body">
+                    <h5>Chỉ số KPI hoàn thành</h5>
+                    <span><?php echo round($kpiAll, 2) ?> % / 100%</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-6 col-sm-6 pl-4">
+            <div class="card o-hidden mt-2">
+                <div class="card-body">
+                    <h5>Thu nhập cá nhân</h5>
+                    <span><?php echo number_format($salary) ?> VNĐ / <?php echo number_format((int)$basicSalary) ?> VNĐ</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="table-responsive mt-3">
         <!-- Đang thực hiện -->
         <table class="table table-hover">
             <thead>
@@ -20,37 +39,19 @@
                 </tr>
             </thead>
             <tbody>
+            <?php foreach($taskIn as $ti){ ?>
                 <tr>
-                    <th scope="row">1</th>
-                    <td>Phân tích thị trường khu vực HN 3 tháng cuối năm
+                    <th scope="row"><?php echo $ti -> id  ?></th>
+                    <td><?php echo $ti -> headline ?>
                         <br>
                         <i style="color: blue;" data-toggle="modal" data-target="#modalDetail"><u>Chi tiết</u></i>
                     </td>
                     <td>
-                        <div class="progress">
-                            <div class="progress-bar progress-bar-striped active progress-bar-animated"
-                                role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"
-                                style="width:40%">
-                                40%
-                            </div>
-                        </div>
+                        <?php task::progress1($ti -> id)  ?>
                     </td>
-                    <td>18/10-20/10</td>
+                    <td><?php echo $ti -> duedate ?></td>
                 </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Đánh giá điều chỉnh mục tiêu KPI của phòng</td>
-                    <td>
-                        <div class="progress">
-                            <div class="progress-bar progress-bar-striped active progress-bar-animated"
-                                role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
-                                style="width:60%">
-                                60%
-                            </div>
-                        </div>
-                    </td>
-                    <td>18/10-20/10</td>
-                </tr>
+            <?php } ?>
             </tbody>
         </table>
         <!-- Modal Detail -->
@@ -78,7 +79,7 @@
             </div>
         </div>
         <!-- Chưa thực hiện -->
-        <table class="table table-hover">
+        <table class="table table-hover" id="">
             <thead>
                 <tr class="bg-danger" style="color: aliceblue;">
                     <th scope="col">#</th>
@@ -88,36 +89,23 @@
                 </tr>
             </thead>
             <tbody>
+            <?php foreach($task as $t){ ?>
                 <tr>
-                    <th scope="row">1</th>
-                    <td>Phân tích thị trường khu vực HN 3 tháng cuối năm</td>
-                    <td>
-                        <div class="progress">
-                            <div class="progress-bar progress-bar-striped active bg-danger" role="progressbar"
-                                aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:100%">
-                                0%
-                            </div>
-                        </div>
+                    <th scope="row"><?php echo $t->id ?></th>
+                    <td><?php echo $t->headline ?>
+                    <br>
+                        <i style="color: blue;" data-toggle="modal" data-target="#modalDetail"><u>Chi tiết</u></i>
                     </td>
-                    <td>18/10-20/10</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Đánh giá điều chỉnh mục tiêu KPI của phòng</td>
                     <td>
-                        <div class="progress">
-                            <div class="progress-bar progress-bar-striped active bg-danger" role="progressbar"
-                                aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:100%">
-                                0%
-                            </div>
-                        </div>
+                    <?php task::progress1($t -> id)  ?>
                     </td>
-                    <td>18/10-20/10</td>
+                    <td><?php echo $t -> duedate ?></td>
                 </tr>
+            <?php } ?>
             </tbody>
         </table>
         <!-- Đã hoàn thành -->
-        <table class="table table-hover">
+        <table class="table table-hover" id="">
             <thead>
                 <tr class="bg-success" style="color: aliceblue;">
                     <th scope="col">#</th>
@@ -127,32 +115,19 @@
                 </tr>
             </thead>
             <tbody>
+            <?php foreach($taskDone as $tD){ ?>
                 <tr>
-                    <th scope="row">1</th>
-                    <td>Phân tích thị trường khu vực HN 3 tháng cuối năm</td>
-                    <td>
-                        <div class="progress">
-                            <div class="progress-bar bg-success" role="progressbar" aria-valuenow="100"
-                                aria-valuemin="0" aria-valuemax="100" style="width:100%">
-                                100%
-                            </div>
-                        </div>
+                    <th scope="row"><?php echo $tD -> id ?></th>
+                    <td><?php echo $tD -> headline ?>
+                    <br>
+                        <i style="color: blue;" data-toggle="modal" data-target="#modalDetail"><u>Chi tiết</u></i>
                     </td>
-                    <td>18/10-20/10</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Đánh giá điều chỉnh mục tiêu KPI của phòng</td>
                     <td>
-                        <div class="progress">
-                            <div class="progress-bar bg-success" role="progressbar" aria-valuenow="100"
-                                aria-valuemin="0" aria-valuemax="100" style="width:100%">
-                                100%
-                            </div>
-                        </div>
+                        <?php task::progress1($tD -> id)  ?>
                     </td>
-                    <td>18/10-20/10</td>
+                    <td><?php echo $tD->duedate ?></td>
                 </tr>
+            <?php } ?>
             </tbody>
         </table>
     </div>

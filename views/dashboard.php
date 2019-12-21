@@ -16,7 +16,7 @@
                     echo "Phòng công nghệ";
                     break;
                 case '3':
-                    echo "Toàn bộ nhân viên";
+                    echo "Danh sách quản lý";
                     break;
                 case '4':
                     echo "Phòng kỹ thuật";
@@ -60,7 +60,7 @@
                     </div>
                     <br>
                     <div class="col-sm-4" style="margin-top: 3%">
-                        Mục tiêu
+                        Công việc
                     </div>
                     <div class="col-sm-8" style="margin-top: 3%">
                         <input id="headline" type="text" class="form-control" name="msg" placeholder="">
@@ -70,6 +70,108 @@
                     </div>
                     <div class="col-sm-8" style="margin-top: 5%">
                         <textarea class="form-control" id="bodyTask" rows="3"></textarea>
+                    </div>
+                    <div class="col-sm-4" style="margin-top: 3%">
+                        Mục tiêu
+                    </div>
+                    <div class="col-sm-8" style="margin-top: 3%">
+                        <select class="form-control" id="level">
+                            <option value="1">
+                                <?php switch ($zone) {
+                                    case '1':
+                                        echo "Đạt doanh số 10.000.000 VNĐ";
+                                        break;
+                                    case '2':
+                                        echo "Độ khó 1";
+                                        break;
+                                    case '3':
+                                        echo "KPI quản lý 1";
+                                        break;
+                                    case '4':
+                                        echo "Độ khó 1";
+                                        break;
+                                    case '5':
+                                        echo "Độ ưu tiên thấp";
+                                        break;
+                                } ?>
+                            </option>
+                            <option value="2">
+                                <?php switch ($zone) {
+                                    case '1':
+                                        echo "Đạt doanh số 20.000.000 VNĐ";
+                                        break;
+                                    case '2':
+                                        echo "Độ khó 2";
+                                        break;
+                                    case '3':
+                                        echo "KPI quản lý 2";
+                                        break;
+                                    case '4':
+                                        echo "Độ khó 2";
+                                        break;
+                                    case '5':
+                                        echo "Độ ưu tiên trung bình";
+                                        break;
+                                } ?>
+                            </option>
+                            <option value="3">
+                                <?php switch ($zone) {
+                                    case '1':
+                                        echo "Đạt doanh số 30.000.000 VNĐ";
+                                        break;
+                                    case '2':
+                                        echo "Độ khó 3";
+                                        break;
+                                    case '3':
+                                        echo "KPI quản lý 3";
+                                        break;
+                                    case '4':
+                                        echo "Độ khó 3";
+                                        break;
+                                    case '5':
+                                        echo "Độ ưu tiên vừa";
+                                        break;
+                                } ?>
+                            </option>
+                            <option value="4">
+                                <?php switch ($zone) {
+                                    case '1':
+                                        echo "Đạt doanh số 40.000.000 VNĐ";
+                                        break;
+                                    case '2':
+                                        echo "Độ khó 4";
+                                        break;
+                                    case '3':
+                                        echo "KPI quản lý 4";
+                                        break;
+                                    case '4':
+                                        echo "Độ khó 4";
+                                        break;
+                                    case '5':
+                                        echo "Độ ưu tiên cao";
+                                        break;
+                                } ?>
+                            </option>
+                            <option value="5">
+                                <?php switch ($zone) {
+                                    case '1':
+                                        echo "Đạt doanh số 50.000.000 VNĐ";
+                                        break;
+                                    case '2':
+                                        echo "Độ khó 5";
+                                        break;
+                                    case '3':
+                                        echo "KPI quản lý 5";
+                                        break;
+                                    case '4':
+                                        echo "Độ khó 5";
+                                        break;
+                                    case '5':
+                                        echo "Độ ưu tiên cực cao (cần gấp)";
+                                        break;
+                                } ?>
+                            </option>
+                        </select>
                     </div>
                     <div class="col-sm-4" style="margin-top: 3%">
                         Hạn hoàn thành
@@ -103,26 +205,26 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-sm-4" style="margin-top: 3%">
-                        <label for="name">Họ và tên:</label>
+                        <p>Họ và tên</p>
                     </div>
                     <div class="col-sm-8" style="margin-top: 3%">
                         <input type="text" class="form-control" id="name" placeholder="Nhập tên" name="fname">
                     </div>
                     <div class="col-sm-4" style="margin-top: 3%">
-                        <label for="telephone">Số điện thoại:</label>
+                        <p>Số điện thoại</p>
                     </div>
                     <div class="col-sm-8" style="margin-top: 3%">
                         <input type="tel" class="form-control" id="phone" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
                                 required placeholder="Nhập số điện thoại" name="telephone">
                     </div>
                     <div class="col-sm-4" style="margin-top: 3%">
-                        <label for="email">Email:</label>
+                        <p>Email</p>
                     </div>
                     <div class="col-sm-8" style="margin-top: 3%">
                         <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
                     </div>
                     <div class="col-sm-4" style="margin-top: 3%">
-                        <label for="zone">Phòng</label>
+                        <p>Phòng</p>
                     </div>
                     <div class="col-sm-8" style="margin-top: 3%">
                         <select class="form-control" id="sel1" name="sellist1">
@@ -134,7 +236,7 @@
                         </select>
                     </div>  
                     <div class="col-sm-4" style="margin-top: 3%">
-                        <label for="position">Vị trí</label>
+                        <p>Vị trí</p>
                     </div>
                     <div class="col-sm-8" style="margin-top: 3%">
                         <select class="form-control" id="sel2" name="sellist1">
@@ -208,7 +310,7 @@
                     break;
             } ?></td>
                 <td><?php echo $ke -> position ?></td>
-                <td>0<?php echo $ke -> phone ?></td>
+                <td><?php echo $ke -> phone ?></td>
             </tr>
             <?php } ?>
         </tbody>
@@ -317,7 +419,8 @@
         var headline = $("#headline").val();
         var bodyTask = $("#bodyTask").val();
         var date = $("#datepicker1").val();
-        var duedate = `${date.split("/")[2]}-${date.split("/")[0]}-${date.split("/")[1]}`
+        var duedate = `${date.split("/")[2]}-${date.split("/")[0]}-${date.split("/")[1]}`;
+        var level = $("#level").val();
         $.ajax({
             type: "POST",
             url: "controllers/newTask.php",
@@ -325,7 +428,8 @@
                 idUser: parseInt(userId),
                 headline: headline,
                 body: bodyTask,
-                duedate: duedate
+                duedate: duedate,
+                level: parseInt(level)
             },
             cache: false,
             success: function (data) {
@@ -342,5 +446,22 @@
         var email = $("#email").val();
         var zone = $("#sel1").val();
         var position = $("#sel2").val();
+        $.ajax({
+            type: "POST",
+            url: "controllers/user.php",
+            data: {
+                request: "addUser",
+                name: name,
+                phone: phone,
+                email: email,
+                zone: parseInt(zone),
+                position: parseInt(position)
+            },
+            cache: false,
+            success: function (data) {
+                console.log(data)
+                $("#newEmploye").modal("hide")
+            }
+        })
     }
 </script>
