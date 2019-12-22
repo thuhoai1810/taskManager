@@ -14,12 +14,12 @@ if ($p <= 3) {
         </a>
         <div class='dropdown-menu' aria-labelledby='navbarDropdown'>
           <a class='dropdown-item' href='index.php?controller=dashboard&zone=1'>Phòng kinh doanh</a>
-          <a class='dropdown-item' href='index.php?controller=dashboard&zone=2'>Phòng công nghệ</a>
+          <a class='dropdown-item' href='index.php?controller=dashboard&zone=2'>Phòng phát triển</a>
+          <a class='dropdown-item' href='index.php?controller=dashboard&zone=3'>Phòng hành chính nhân sự</a>
           <a class='dropdown-item' href='index.php?controller=dashboard&zone=4'>Phòng kỹ thuật</a>
           <a class='dropdown-item' href='index.php?controller=dashboard&zone=5'>Phòng sản xuất</a>
           <div class='dropdown-divider'></div>
-          <a class='dropdown-item' href='index.php?controller=dashboard&zone=3'>Phòng giám đốc</a>
-          <a class='dropdown-item' href='index.php?controller=dashboard&zone=6'>Nhân viên chưa vào phòng ban</a>
+          <a class='dropdown-item' href='index.php?controller=dashboard&zone=6'>Cấp độ quản lý</a>
         </div>
       </li>";
 }else if($p > 3 && $p <= 8){

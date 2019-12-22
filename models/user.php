@@ -1,7 +1,7 @@
 <?php
 class user extends Database{
-    function createUser($name,$phone,$zone,$permiss,$position,$kpi){
-        $sql ="INSERT INTO users(name,permission,phone,zone,position,kpi) VALUES ('{$name}',$permiss,'{$phone}',$zone,'${position}',$kpi)";
+    function createUser($name,$phone,$zone,$permiss,$position,$kpi,$salary){
+        $sql ="INSERT INTO users(name,permission,phone,zone,position,kpi,money) VALUES ('{$name}',$permiss,'{$phone}',$zone,'${position}',$kpi,'{$salary}')";
         parent::execute($sql);
     }
     function regiter($user,$id){

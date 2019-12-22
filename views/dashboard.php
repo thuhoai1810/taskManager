@@ -13,7 +13,7 @@
                     echo "Phòng kinh doanh";
                     break;
                 case '2':
-                    echo "Phòng công nghệ";
+                    echo "Phòng phát trển";
                     break;
                 case '3':
                     echo "Danh sách quản lý";
@@ -228,11 +228,31 @@
                     </div>
                     <div class="col-sm-8" style="margin-top: 3%">
                         <select class="form-control" id="sel1" name="sellist1">
-                            <option value="1">Phòng Kinh doanh</option>
-                            <option value="2">Phòng Công nghệ</option>
-                            <option value="3">Phòng Nhân sự</option>
-                            <option value="4">Phòng Kỹ thuật</option>
-                            <option value="5">Phòng sản xuất</option>
+                            <?php switch ($zone) {
+                                case '1':
+                                    echo "<option value='1'>Phòng Kinh doanh</option>";
+                                    break;
+                                case '2':
+                                    echo "<option value='2'>Phòng phát trển</option>";
+                                    break;
+                                case '3':
+                                    echo "<option value='3'>Phòng Nhân sự</option>";
+                                    break;
+                                case '4':
+                                    echo "<option value='4'>Phòng Kỹ thuật</option>";
+                                    break;
+                                case '5':
+                                    echo "<option value='5'>Phòng sản xuất</option>";
+                                    break;
+                                case '6':
+                                    echo "<option value='1'>Phòng Kinh doanh</option>
+                                        <option value='2'>Phòng Công nghệ</option>
+                                        <option value='3'>Phòng Nhân sự</option>
+                                        <option value='4'>Phòng Kỹ thuật</option>
+                                        <option value'5'>Phòng sản xuất</option>
+                                        <option value='6'>Người quản lý</option>";
+                                    break;
+                            } ?>
                         </select>
                     </div>  
                     <div class="col-sm-4" style="margin-top: 3%">
@@ -240,19 +260,41 @@
                     </div>
                     <div class="col-sm-8" style="margin-top: 3%">
                         <select class="form-control" id="sel2" name="sellist1">
-                            <option value="3">Phó giám đốc</option>
-                            <option value="4">Trưởng phòng (P.sản xuất)</option>
-                            <option value="5">Trưởng phòng (P.kỹ thuật)</option>
-                            <option value="6">Trưởng phòng (P.công nghệ)</option>
-                            <option value="7">Trưởng phòng (P.kinh doanh)</option>
-                            <option value="8">Trưởng phòng (P.nhân sự)</option>
-                            <option value="9">Nhân viên marketing</option>
-                            <option value="10">Nhân viên sale</option>
-                            <option value="11">Nhân viên nhân sự</option>
-                            <option value="12">Nhân viên kỹ thuật</option>
-                            <option value="13">Nhân viên công nghệ</option>
-                            <option value="14">Nhân viên hành chính</option>
-                            <option value="15">Nhân viên sản xuất</option>
+                            <?php switch ($zone) {
+                                case '1':
+                                    echo "
+                                        <option value='7'>Trưởng phòng kinh doanh</option>
+                                        <option value='9'>Nhân viên marketing</option>
+                                        <option value='10'>Nhân viên sale</option>
+                                    ";
+                                    break;
+                                case '2':
+                                    echo "<option value='6'>Trưởng phòng phát triển</option>
+                                        <option value='18'>Nhân viên nghiên cứu phát trển thị trường</option>
+                                        <option value='19'>Dược sĩ</option>
+                                        <option value='20'>Thiết kế và đóng gói bao bì</option>
+                                        <option value='13'>Nhân viên thử nghiệm</option>
+                                        ";
+                                    break;
+                                case '3':
+                                    echo "<option value='8'>Trưởng phòng nhân sự</option>
+                                        <option value='11'>Nhân viên nhân sự</option>
+                                        <option value='14'>Nhân viên hành chính</option>";
+                                    break;
+                                case '4':
+                                    echo "<option value='5'>Trưởng phòng (P.kỹ thuật)</option>
+                                        <option value='12'>Nhân viên kỹ thuật</option>
+                                        <option value='16'>Nhân viên SEO</option>
+                                        <option value='17'>Nhân viên Bảo mật</option>";
+                                    break;
+                                case '5':
+                                    echo "<option value='4'>Trưởng phòng sản xuất</option>
+                                        <option value='15'>Nhân viên sản xuất</option>";
+                                    break;
+                                case '6':
+                                    echo "<option value='3'>Phó giám đốc</option>";
+                                    break;
+                            } ?>
                         </select>
                     </div>
                 </div>
@@ -294,10 +336,10 @@
                     echo "Phòng kinh doanh";
                     break;
                 case '2':
-                    echo "Phòng công nghệ";
+                    echo "Phòng phát triển";
                     break;
                 case '3':
-                    echo "Admin";
+                    echo "Phòng hành chính nhân sự";
                     break;
                 case '4':
                     echo "Phòng kỹ thuật";
@@ -306,7 +348,7 @@
                     echo "Phòng sản xuất";
                     break;
                 default:
-                    echo "Chưa có phòng";
+                    echo "Quản lý công ty";
                     break;
             } ?></td>
                 <td><?php echo $ke -> position ?></td>
