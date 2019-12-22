@@ -12,6 +12,7 @@ switch ($_POST['request']) {
             <th scope='col' style='width: 60%'>Task đã hoàn thành</th>
             <th scope'col'>Tiến trình</th>
             <th scope='col'>Thời hạn</th>
+            <th scope='col'>Hành động</th>
         </tr>
         </thead>";
         echo "<tbody>";
@@ -27,6 +28,7 @@ switch ($_POST['request']) {
             <th scope='col' style='width: 60%'>Task đang tiến hành</th>
             <th scope'col'>Tiến trình</th>
             <th scope='col'>Thời hạn</th>
+            <th scope='col'>Hành động</th>
         </tr>
         </thead>";
         echo "<tbody>";
@@ -42,6 +44,7 @@ switch ($_POST['request']) {
             <th scope='col' style='width: 60%'>Task quá hạn</th>
             <th scope'col'>Tiến trình</th>
             <th scope='col'>Thời hạn</th>
+            <th scope='col'>Hành động</th>
         </tr>
         </thead>";
         echo "<tbody>";
@@ -51,6 +54,11 @@ switch ($_POST['request']) {
     case 'getTaskId':
         $task = task::selectTaskId((int)$_POST['id']);
         echo $task[0]->headline;
+        break;
+    case 'deleteTask':
+        $id = $_POST['id'];
+        task::deleteTaskUser($id);
+        task::deleteTask($id);
         break;
 }
 ?>

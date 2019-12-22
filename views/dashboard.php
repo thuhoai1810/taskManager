@@ -289,7 +289,8 @@
                                     break;
                                 case '5':
                                     echo "<option value='4'>Trưởng phòng sản xuất</option>
-                                        <option value='15'>Nhân viên sản xuất</option>";
+                                        <option value='15'>Nhân viên sản xuất</option>
+                                        <option value='21'>Nhân viên kiểm định</option>";
                                     break;
                                 case '6':
                                     echo "<option value='3'>Phó giám đốc</option>";
@@ -317,6 +318,7 @@
                 <th scope="col">Phòng</th>
                 <th scope="col">Chức vụ</th>
                 <th scope="col">Số điện thoại</th>
+                <th scope="col">Hành động</th>
             </tr>
         </thead>
         <tbody>
@@ -353,6 +355,7 @@
             } ?></td>
                 <td><?php echo $ke -> position ?></td>
                 <td><?php echo $ke -> phone ?></td>
+                <td><button type="button" class="btn btn-danger" onclick="deleteUser(<?php echo $ke -> id?>)">Xoá nhân viên</button></td>
             </tr>
             <?php } ?>
         </tbody>
@@ -501,8 +504,41 @@
             },
             cache: false,
             success: function (data) {
-                console.log(data)
                 $("#newEmploye").modal("hide")
+                location.reload();
+            }
+        })
+    }
+
+    function deleteUser(id) {
+        $.ajax({
+            type: "POST",
+            url: "controllers/user.php",
+            data: {
+                request: "deleteUser",
+                id: parseInt(id)
+            },
+            cache: false,
+            success: function (data) {
+                $("#newEmploye").modal("hide")
+                location.reload();
+            }
+        })
+    }
+
+    function deleteTask(id,userId) {
+        $.ajax({
+            type: "POST",
+            url: "controllers/taskUser.php",
+            data: {
+                request: "deleteTask",
+                id: parseInt(id)
+            },
+            cache: false,
+            success: function (data) {
+                getTaskDone(userId);
+                getTaskIn(userId);
+                getTaskDis(userId);
             }
         })
     }

@@ -23,8 +23,15 @@ class user extends Database{
           }
           return $data;
     }
+    function deleteUserTask(){
+        parent::delete('user_task','userId',$id);
+    }
     function deleteUser($id){
         parent::delete('users','id',$id);
+    }
+    function deleteAccount($id)
+    {
+        parent::delete('login','user_id',$id);
     }
     function selectAllUser(){
         return parent::getAllData('users');

@@ -42,6 +42,10 @@ class task extends Database{
         $sql = "UPDATE tasks SET state = $state WHERE id = $id";
         parent::execute($sql);
     }
+    function deleteTaskUser($id)
+    {
+        parent::delete('user_task','taskId',$id);
+    }
     function deleteTask($id){
         parent::delete('tasks','id',$id);
     }
@@ -69,6 +73,7 @@ class task extends Database{
                 ".self::progress($td->id)."
             </td>
             <td>".$td->duedate."</td>
+            <td><button type='button' class='btn btn-danger' onclick='deleteTask(".$td->id.",".$id.")'>Xoá</button></td>
         </tr>";
         }
     }
@@ -87,6 +92,7 @@ class task extends Database{
                     ".self::progress($ti->id)."
                     </td>
                     <td>".$ti->duedate."</td>
+                    <td><button type='button' class='btn btn-danger' onclick='deleteTask(".$ti->id.",".$id.")'>Xoá</button></td>
                 </tr>";
         }
     }
@@ -103,6 +109,7 @@ class task extends Database{
                 ".self::progress($td->id)."
             </td>
             <td>".$td->duedate."</td>
+            <td><button type='button' class='btn btn-danger' onclick='deleteTask(".$td->id.",".$id.")'>Xoá</button></td>
         </tr>";
         }
     }

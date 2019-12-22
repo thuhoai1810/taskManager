@@ -9,7 +9,6 @@ switch ($_POST['request']) {
         $email = $_POST['email'];
         $zone = $_POST['zone'];
         $position = $_POST['position'];
-        
         switch ($_POST['position']){
             case 3:
                 $emty = "Phó giám đốc";
@@ -142,7 +141,7 @@ switch ($_POST['request']) {
                 }
                 break;
             case 13:
-                $emty = "Nhân viên công nghệ";
+                $emty = "Nhân viên kiểm định";
                 $kpi = 10;
                 $money = "10000000";
                 user::createUser($name,$phone,$zone,$position,$emty,$kpi,$money);
@@ -233,7 +232,7 @@ switch ($_POST['request']) {
                 }
                 break;
             case 20:
-                $emty = "Nhân viên thử nghiệm";
+                $emty = "Nhân viên thiết kế bao bì";
                 $kpi = 10;
                 $money = "10000000";
                 user::createUser($name,$phone,$zone,$position,$emty,$kpi,$money);
@@ -246,7 +245,7 @@ switch ($_POST['request']) {
                 }
                 break;
             case 21:
-                $emty = "Nhân viên thiết kế bao bì";
+                $emty = "Nhân viên kiểm định";
                 $kpi = 10;
                 $money = "10000000";
                 user::createUser($name,$phone,$zone,$position,$emty,$kpi,$money);
@@ -260,6 +259,11 @@ switch ($_POST['request']) {
                 break;
         }
     break;
-    
+    case 'deleteUser':
+        $id = $_POST['id'];
+        user::deleteUserTask($id);
+        user::deleteAccount($id);
+        user::deleteUser($id);
+    break;
 }
 ?>
