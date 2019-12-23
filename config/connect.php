@@ -3,13 +3,13 @@ class Database
 {
     private static $dbc;   
     public static function connect(){
-         self::$dbc = mysqli_connect('localhost','root','','taskmanager');
-         if (!self::$dbc) {
-            echo "k thể kết nối database";
-         } else {
-            mysqli_set_charset(self::$dbc,'utf8');
-         }
-         return self::$dbc;
+        self::$dbc = mysqli_connect('ec2-174-129-253-113.compute-1.amazonaws.com','nxqqvzlnxpjviq','e47da855ae2f98cdaf1ecff15e5778ace8a1e1efe6956d7d33ce61420ccb0559','d9n71jdmc9reba');
+        if (!self::$dbc) {
+           echo "k thể kết nối database";
+        } else {
+           mysqli_set_charset(self::$dbc,'utf8');
+        }
+        return self::$dbc;
     }
     public function execute($sql){
         $result = self::$dbc->query($sql);
