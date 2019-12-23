@@ -3,7 +3,7 @@ class Database
 {
     private static $dbc;   
     public static function connect(){
-        self::$dbc = mysqli_connect('https://db4free.net','tuntadsplus','Vietnam1205','taskmanager');
+        self::$dbc = mysqli_connect('85.10.205.173:3306','tuntadsplus','Vietnam1205','taskmanager');
         if (!self::$dbc) {
            echo "k thể kết nối database";
         } else {
