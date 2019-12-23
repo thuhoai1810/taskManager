@@ -3,7 +3,7 @@ class Database
 {
     private static $dbc;   
     public static function connect(){
-        self::$dbc = mysqli_connect('85.10.205.173:3306','tuntadsplus','Vietnam1205','taskmanager');
+        self::$dbc = mysqli_connect('sql309.freevnn.com','freev_24965053','12051997','freev_24965053_taskmanager');
         if (!self::$dbc) {
            echo "k thể kết nối database";
         } else {
