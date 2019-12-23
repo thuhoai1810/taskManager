@@ -42,7 +42,7 @@ CREATE TABLE `login` (
 INSERT INTO `login` (`id`, `user`, `pass`, `user_id`) VALUES
 (1, 'tunt@adsplus.vn', 'tunt', 1),
 (2, 'linhbidao@occho.vn', 'linhchimbe', 2),
-(3, 'hoaicochim@cc.vn', 'hoaichimbe', 3),
+(3, 'dinhhoai18101998@gmail.com', 'tunt', 3),
 (4, 'manmo@manmo.vn', 'manmo', 4),
 (5, 'tontumo123@gmail.com', 'tunt', 9);
 
